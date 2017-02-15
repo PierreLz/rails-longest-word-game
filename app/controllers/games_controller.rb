@@ -2,7 +2,6 @@ class GamesController < ApplicationController
   def game
     @start_time = Time.now
     @grid = generate_grid(9)
-
   end
 
   def score
@@ -13,13 +12,11 @@ class GamesController < ApplicationController
     @result = run_game(@attempt, @grid, @start_time, @end_time)
   end
 
-
   private
 
   def generate_grid(grid_size)
     Array.new(grid_size) { ('A'..'Z').to_a[rand(26)] }
   end
-
 
   def included?(guess, grid)
     guess.split(" ").all? { |letter| guess.count(letter) <= grid.count(letter) }
@@ -35,7 +32,6 @@ class GamesController < ApplicationController
     @result[:translation] = get_translation(attempt)
     @result[:score], @result[:message] = score_and_message(
       attempt, @result[:translation], grid, @result[:time])
-
     @result
   end
 
